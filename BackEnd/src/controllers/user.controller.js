@@ -39,3 +39,16 @@ exports.create = async (req, res) => {
 
   res.json(user);
 };
+
+// Update a user in the database
+exports.update = async (req, res) => {
+  const hash = await argon2.hash(req.body.password, { type: argon2.argon2id });
+
+  user.first_name = req.body.first_name;
+  user.last_name = req.body.last_name;
+  user.password = hash;
+
+  await user.save();
+
+  res.json(user);
+}

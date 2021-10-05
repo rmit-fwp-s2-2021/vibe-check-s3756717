@@ -8,10 +8,12 @@ db.sync();
 const app = express();
 
 // Parse requests of content-type - application/json.
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 
 // Add CORS suport.
 app.use(cors());
+
 
 // Simple Hello World route.
 app.get("/", (req, res) => {

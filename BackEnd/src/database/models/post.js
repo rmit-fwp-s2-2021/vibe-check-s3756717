@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) =>
     text: {
       type: DataTypes.STRING(600),
       allowNull: false
+    },
+    postPicture: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     // Don't add the timestamp attributes (updatedAt, createdAt).

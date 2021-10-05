@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { verifyUser } from "../data/repository";
+import {
+  Link
+} from "react-router-dom";
+import Footer from "./Footer";
+import './styles/SignUp.css';
 
 export default function Login(props) {
   const history = useHistory();
@@ -28,37 +33,74 @@ export default function Login(props) {
     props.loginUser(user);
 
     // Navigate to the home page.
-    history.push("/");
+    history.push("/dashboard");
   };
 
-  return (
-    <div>
-      <h1>Login</h1>
-      <hr />
-      <div className="row">
-        <div className="col-md-6">
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="username" className="control-label">Username</label>
-              <input name="username" id="username" className="form-control"
-                value={fields.username} onChange={handleInputChange} />
+  return(
+    <div className = "landingWrapper">
+            <div className = "dashTop">
+                <Link to = "/" style={{ textDecoration: 'none', color: 'white' }} className = "dashHead">Vibe Check</Link>
+                <div className = "landingBtns">
+                    <Link to = "/signUp" style={{ textDecoration: 'none' }} className = "signIn">Sign Up</Link>
+                </div>
             </div>
-            <div className="form-group">
-              <label htmlFor="password" className="control-label">Password</label>
-              <input type="password" name="password" id="password" className="form-control"
-                value={fields.password} onChange={handleInputChange} />
+
+            <div className = "signUpContent">
+                <div className = "signUpSection">
+                    <div className = "signUpQuote">Login to Enjoy the Serotonin!</div>
+                    <form className = "signUpForm" onSubmit={handleSubmit}>   
+                        <div className = "formElement">
+                                <div className = "formLabel">Username</div>
+                                <input name="username" id="username" placeholder = " Username" className="formInput"
+                                    value={fields.username} onChange={handleInputChange} />
+                        </div>
+
+                        <div className = "formElement">
+                                <div className = "formLabel">Password</div>
+                                <input type="password" name="password" id="password" placeholder = " Password" className="formInput"
+                                    value={fields.password} onChange={handleInputChange} />
+                        </div>
+                        {errorMessage !== null &&
+                            <span className="errorMessage">{errorMessage}</span>
+                        }
+
+                        <input type="submit" className="signUpButton signUp signUpHover" value="Let's Goooo!" />
+                    </form>
+                </div>
             </div>
-            <div className="form-group">
-              <input type="submit" className="btn btn-primary" value="Login" />
-            </div>
-            {errorMessage !== null &&
-              <div className="form-group">
-                <span className="text-danger">{errorMessage}</span>
-              </div>
-            }
-          </form>
+
+            <Footer/>
         </div>
-      </div>
-    </div>
   );
+
+  // return (
+  //   <div>
+  //     <h1>Login</h1>
+  //     <hr />
+  //     <div className="row">
+  //       <div className="col-md-6">
+  //         <form onSubmit={handleSubmit}>
+  //           <div className="form-group">
+  //             <label htmlFor="username" className="control-label">Username</label>
+  //             <input name="username" id="username" className="form-control"
+  //               value={fields.username} onChange={handleInputChange} />
+  //           </div>
+  //           <div className="form-group">
+  //             <label htmlFor="password" className="control-label">Password</label>
+  //             <input type="password" name="password" id="password" className="form-control"
+  //               value={fields.password} onChange={handleInputChange} />
+  //           </div>
+  //           <div className="form-group">
+  //             <input type="submit" className="btn btn-primary" value="Login" />
+  //           </div>
+  //           {errorMessage !== null &&
+  //             <div className="form-group">
+  //               <span className="text-danger">{errorMessage}</span>
+  //             </div>
+  //           }
+  //         </form>
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
 }

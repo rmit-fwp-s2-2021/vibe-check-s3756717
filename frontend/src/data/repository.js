@@ -28,6 +28,12 @@ async function createUser(user) {
   return response.data;
 }
 
+async function updateUser(user) {
+  const response = await axios.put(API_HOST + "/api/users", user);
+
+  return response.data;
+}
+
 // --- Post ---------------------------------------------------------------------------------------
 async function getPosts() {
   const response = await axios.get(API_HOST + "/api/posts");
@@ -55,7 +61,7 @@ function removeUser() {
 }
 
 export {
-  verifyUser, findUser, createUser,
+  verifyUser, findUser, createUser, updateUser,
   getPosts, createPost,
   getUser, removeUser
 }

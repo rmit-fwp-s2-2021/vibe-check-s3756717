@@ -1,9 +1,18 @@
-import React from "react";
+/* FOOTER - Has covid details and a basic footer for the website */
 
-export default function Footer() {
-  return (
-    <footer className="mt-auto py-3 bg-dark text-white">
-      <div className="container">Register, Login and Logout Example &copy; 2021</div>
-    </footer>
-  );
+import './styles/Footer.css';
+
+export default function Footer(){
+    return(
+        <div className = "footerWrapper">
+            <div class="footerContent">
+                <div class="vcFoot">Vibe Check</div>
+                    <div class="covid">
+                        <div>Coronavirus Health Information Line 1800 020 080</div>
+                        <div>Business Help Hotline 13 28 46</div>
+                        <div>Consular Assistance Call +61 2 6261 3305 (overseas) / 1300 555 135 (within Australia)</div>
+                    </div>
+            </div>
+        </div>
+    );
 }

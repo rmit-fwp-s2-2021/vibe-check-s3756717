@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { findUser, createUser } from "../data/repository";
+import './styles/SignUp.css';
+import signUpPic from './addons/signUpPic.png';
+import Footer from './Footer';
 
 export default function Register(props) {
   const history = useHistory();
@@ -30,7 +33,7 @@ export default function Register(props) {
     props.loginUser(user);
 
     // Navigate to the home page.
-    history.push("/");
+    history.push("/dashboard");
   };
 
   const handleValidation = async () => {
@@ -85,62 +88,134 @@ export default function Register(props) {
     return trimmedFields;
   };
 
-  return (
-    <div>
-      <h1>Register</h1>
-      <hr />
-      <div className="row">
-        <div className="col-md-6">
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="username" className="control-label">Username</label>
-              <input name="username" id="username" className="form-control"
-                value={fields.username} onChange={handleInputChange} />
-              {errors.username &&
-                <div className="text-danger">{errors.username}</div>
-              }
+  return(
+    <div className = "landingWrapper">
+            <div className = "dashTop">
+                <Link to = "/" style={{ textDecoration: 'none', color: 'white' }} className = "dashHead">Vibe Check</Link>
+                <div className = "landingBtns">
+                    <Link to = "/register" style={{ textDecoration: 'none' }} className = "signIn">Sign In</Link>
+                </div>
             </div>
-            <div className="form-group">
-              <label htmlFor="firstname" className="control-label">First name</label>
-              <input name="firstname" id="firstname" className="form-control"
-                value={fields.firstname} onChange={handleInputChange} />
-              {errors.firstname &&
-                <div className="text-danger">{errors.firstname}</div>
-              }
+
+            <div className = "signUpContent">
+                <div className = "signUpSection">
+                    <div className = "signUpQuote">Sign Up to have your vibes lifted!</div>
+                    <form className = "signUpForm" onSubmit={handleSubmit}>
+                         {/*selectedFile &&  <img className = "preview" src={preview} alt = "preview"/>
+                        <br></br>
+                        <div className = "formElement">
+                            <div className = "formLabel">Avatar</div>
+                            <input type='file' onChange={onSelectFile} />
+                        </div>
+                        <span className="errorMessage"> {errors.get("preview")} </span>*/}
+                        <div className = "formElement">
+                            <div className = "formLabel">First Name</div>
+                            <input name="firstname" id="firstname" placeholder = " First Name" className="formInput"
+                                  value={fields.firstname} onChange={handleInputChange} required/>
+                        </div>
+                        {errors.firstname &&
+                          <div className="errorMessage">{errors.firstname}</div>
+                        }
+                        <div className = "formElement">
+                            <div className = "formLabel">Last Name</div>
+                            <input name="lastname" id="lastname" placeholder = " Last Name" className="formInput"
+                                  value={fields.lastname} onChange={handleInputChange} required/> 
+                        </div>
+                        {errors.lastname &&
+                          <div className="errorMessage">{errors.lastname}</div>
+                        }
+                        <div className = "formElement">
+                                <div className = "formLabel">Username</div>
+                                <input name="username" id="username" placeholder = " Username" className="formInput"
+                                    value={fields.username} onChange={handleInputChange} required/>    
+                        </div>
+                        {errors.username &&
+                          <div className="errorMessage">{errors.username}</div>
+                        }
+                        <div className = "formElement">
+                                <div className = "formLabel">Password</div>
+                                <input type="password" name="password" id="password" placeholder = " Password" className="formInput"
+                                    value={fields.password} onChange={handleInputChange} />
+                                  
+                        </div>
+                        {errors.password &&
+                          <div className="errorMessage">{errors.password}</div>
+                        }
+
+                        <div className = "formElement">
+                                <div className = "formLabel">Confirm Password</div>
+                                <input type="password" name="confirmPassword" id="confirmPassword" placeholder = " Confirm Password" className="formInput"
+                                    value={fields.confirmPassword} onChange={handleInputChange} />   
+                        </div>
+                        {errors.confirmPassword &&
+                          <div className="errorMessage">{errors.confirmPassword}</div>
+                        }
+                        <input type="submit" className = "signUpButton signUp signUpHover" value="Sign Me Up!" />
+                    </form>
+                </div>
+                <img className = "signUpImg" src = {signUpPic} alt = "sign up"></img>
             </div>
-            <div className="form-group">
-              <label htmlFor="lastname" className="control-label">Last name</label>
-              <input name="lastname" id="firstname" className="form-control"
-                value={fields.lastname} onChange={handleInputChange} />
-              {errors.lastname &&
-                <div className="text-danger">{errors.lastname}</div>
-              }
-            </div>
-            <div className="form-group">
-              <label htmlFor="password" className="control-label">
-                Password <small className="text-muted">must be at least 6 characters</small>
-              </label>
-              <input type="password" name="password" id="password" className="form-control"
-                value={fields.password} onChange={handleInputChange} />
-              {errors.password &&
-                <div className="text-danger">{errors.password}</div>
-              }
-            </div>
-            <div className="form-group">
-              <label htmlFor="confirmPassword" className="control-label">Confirm password</label>
-              <input type="password" name="confirmPassword" id="confirmPassword" className="form-control"
-                value={fields.confirmPassword} onChange={handleInputChange} />
-              {errors.confirmPassword &&
-                <div className="text-danger">{errors.confirmPassword}</div>
-              }
-            </div>
-            <div className="form-group">
-              <input type="submit" className="btn btn-primary mr-5" value="Register" />
-              <Link className="btn btn-outline-dark" to="/">Cancel</Link>
-            </div>
-          </form>
+
+            <Footer/>  
         </div>
-      </div>
-    </div>
   );
+
+  // return (
+  //   <div>
+  //     <h1>Register</h1>
+  //     <hr />
+  //     <div className="row">
+  //       <div className="col-md-6">
+  //         <form onSubmit={handleSubmit}>
+  //           <div className="form-group">
+  //             <label htmlFor="username" className="control-label">Username</label>
+  //             <input name="username" id="username" className="form-control"
+  //               value={fields.username} onChange={handleInputChange} />
+  //             {errors.username &&
+  //               <div className="text-danger">{errors.username}</div>
+  //             }
+  //           </div>
+  //           <div className="form-group">
+  //             <label htmlFor="firstname" className="control-label">First name</label>
+  //             <input name="firstname" id="firstname" className="form-control"
+  //               value={fields.firstname} onChange={handleInputChange} />
+  //             {errors.firstname &&
+  //               <div className="text-danger">{errors.firstname}</div>
+  //             }
+  //           </div>
+  //           <div className="form-group">
+  //             <label htmlFor="lastname" className="control-label">Last name</label>
+  //             <input name="lastname" id="firstname" className="form-control"
+  //               value={fields.lastname} onChange={handleInputChange} />
+  //             {errors.lastname &&
+  //               <div className="text-danger">{errors.lastname}</div>
+  //             }
+  //           </div>
+  //           <div className="form-group">
+  //             <label htmlFor="password" className="control-label">
+  //               Password <small className="text-muted">must be at least 6 characters</small>
+  //             </label>
+  //             <input type="password" name="password" id="password" className="form-control"
+  //               value={fields.password} onChange={handleInputChange} />
+  //             {errors.password &&
+  //               <div className="text-danger">{errors.password}</div>
+  //             }
+  //           </div>
+  //           <div className="form-group">
+  //             <label htmlFor="confirmPassword" className="control-label">Confirm password</label>
+  //             <input type="password" name="confirmPassword" id="confirmPassword" className="form-control"
+  //               value={fields.confirmPassword} onChange={handleInputChange} />
+  //             {errors.confirmPassword &&
+  //               <div className="text-danger">{errors.confirmPassword}</div>
+  //             }
+  //           </div>
+  //           <div className="form-group">
+  //             <input type="submit" className="btn btn-primary mr-5" value="Register" />
+  //             <Link className="btn btn-outline-dark" to="/">Cancel</Link>
+  //           </div>
+  //         </form>
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
 }
