@@ -1,5 +1,6 @@
 const db = require("../database");
 const argon2 = require("argon2");
+const user = require("../database/models/user");
 
 // Select all users from the database.
 exports.all = async (req, res) => {
@@ -34,7 +35,8 @@ exports.create = async (req, res) => {
     username: req.body.username,
     password_hash: hash,
     first_name: req.body.firstname,
-    last_name: req.body.lastname
+    last_name: req.body.lastname,
+    profilePicture: req.body.profilePicture
   });
 
   res.json(user);

@@ -49,7 +49,8 @@ async function createPost(post) {
 
 // --- Helper functions to interact with local storage --------------------------------------------
 function setUser(user) {
-  localStorage.setItem(USER_KEY, JSON.stringify(user));
+  const userItem = {username: user.username, first_name: user.first_name, last_name: user.last_name, password_hash: user.password_hash }
+  localStorage.setItem(USER_KEY, JSON.stringify(userItem));
 }
 
 function getUser() {

@@ -59,9 +59,8 @@ export default function Dashboard(props){
                             
                             <div className="postElement">
                                 <div className = "userText">
-                                    <div className = "postName">{x.username}</div>
-                                    <div className = "postName">•</div>
-                                    {/*<img className = "userAvatar" src = {ppUrl} alt = "avatar"/>*/}
+                                    <img className = "userAvatar" src = {"data:image/jpeg;base64," + x.userProfilePicture} alt = "post"/>
+                                    <h2 className = "postName">{x.username}</h2>
                                 </div>
                                 <div className = "postView">
                                     <img className = "postImg" src = {"data:image/jpeg;base64," + x.postPicture} alt = "post"/>

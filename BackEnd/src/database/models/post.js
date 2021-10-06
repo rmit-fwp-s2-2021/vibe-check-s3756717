@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) =>
     postPicture: {
       type: DataTypes.TEXT,
       allowNull: true
+    },
+    userProfilePicture: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     // Don't add the timestamp attributes (updatedAt, createdAt).

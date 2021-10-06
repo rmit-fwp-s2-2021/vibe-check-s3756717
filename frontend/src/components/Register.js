@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { findUser, createUser } from "../data/repository";
 import './styles/SignUp.css';
 import signUpPic from './addons/signUpPic.png';
 import Footer from './Footer';
+import imageToBase64 from 'image-to-base64/browser';
 
 export default function Register(props) {
   const history = useHistory();
@@ -12,6 +13,34 @@ export default function Register(props) {
     username: "", firstname: "", lastname: "",  password: "", confirmPassword: ""
   });
   const [errors, setErrors] = useState({ });
+  const [selectedFile, setSelectedFile] = useState();
+  var avatar;
+  const [preview, setPreview] = useState();
+
+  // Set preview picture when profile picture is uploaded
+  useEffect(() => {
+    //If file has been selected, don't set preview
+    if (!selectedFile) {
+        setPreview(undefined);
+        return;
+    }
+
+    // Get blob url for preview
+    const objectUrl = URL.createObjectURL(selectedFile);
+    setPreview(objectUrl);
+
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedFile])
+
+  // Function to set selected file
+  const onSelectFile = e => {
+      if (!e.target.files || e.target.files.length === 0) {
+          setSelectedFile(undefined);
+          return;
+      }
+
+      setSelectedFile(e.target.files[0]);
+  }
 
   // Generic change handler.
   const handleInputChange = (event) => {
@@ -20,20 +49,35 @@ export default function Register(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // Get blob for profile picture
+    const avatarUrl = URL.createObjectURL(selectedFile);
+    imageToBase64(avatarUrl) // Get base64 url for profile picture blob
+    .then(
+        async (response) => {
+            avatar = response;
+            // Validate form and if invalid do not contact API.
+            const { trimmedFields, isValid } = await handleValidation();
+            if(!isValid)
+              return;
 
-    // Validate form and if invalid do not contact API.
-    const { trimmedFields, isValid } = await handleValidation();
-    if(!isValid)
-      return;
+            const userItem = {username: trimmedFields.username, firstname: trimmedFields.firstname, lastname: trimmedFields.lastname,
+                              password: trimmedFields.password,  confirmPassword: trimmedFields.confirmPassword, profilePicture: response}
 
-    // Create user.
-    const user = await createUser(trimmedFields);
+            // Create user.
+            const user = await createUser(userItem);
 
-    // Set user state.
-    props.loginUser(user);
+            // Set user state.
+            props.loginUser(user);
 
-    // Navigate to the home page.
-    history.push("/dashboard");
+            // Navigate to the home page.
+            history.push("/dashboard");
+        }
+    )
+    .catch(
+        (error) => {
+            console.log(error); // Logs an error if there was one
+        }
+    )
   };
 
   const handleValidation = async () => {
@@ -93,7 +137,7 @@ export default function Register(props) {
             <div className = "dashTop">
                 <Link to = "/" style={{ textDecoration: 'none', color: 'white' }} className = "dashHead">Vibe Check</Link>
                 <div className = "landingBtns">
-                    <Link to = "/register" style={{ textDecoration: 'none' }} className = "signIn">Sign In</Link>
+                    <Link to = "/login" style={{ textDecoration: 'none' }} className = "signIn">Sign In</Link>
                 </div>
             </div>
 
@@ -101,13 +145,12 @@ export default function Register(props) {
                 <div className = "signUpSection">
                     <div className = "signUpQuote">Sign Up to have your vibes lifted!</div>
                     <form className = "signUpForm" onSubmit={handleSubmit}>
-                         {/*selectedFile &&  <img className = "preview" src={preview} alt = "preview"/>
+                    {selectedFile &&  <img className = "preview" src={preview} alt = "preview"/>}
                         <br></br>
                         <div className = "formElement">
                             <div className = "formLabel">Avatar</div>
-                            <input type='file' onChange={onSelectFile} />
+                            <input type='file' onChange={onSelectFile} required/>
                         </div>
-                        <span className="errorMessage"> {errors.get("preview")} </span>*/}
                         <div className = "formElement">
                             <div className = "formLabel">First Name</div>
                             <input name="firstname" id="firstname" placeholder = " First Name" className="formInput"

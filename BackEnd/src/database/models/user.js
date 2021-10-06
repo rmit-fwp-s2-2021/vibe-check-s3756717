@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) =>
     last_name: {
       type: DataTypes.STRING(40),
       allowNull: false
+    },
+    profilePicture: {
+      type: DataTypes.TEXT,
+      allowNull: false
     }
   }, {
     // Don't add the timestamp attributes (updatedAt, createdAt).

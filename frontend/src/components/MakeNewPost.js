@@ -48,8 +48,7 @@ export default function MakeNewPost(props){
       };
     
       const handleSubmit = async (event) => {
-
-
+          
         event.preventDefault();
         if(preview !== null){
             const imgUrl = URL.createObjectURL(selectedFile);
@@ -71,7 +70,7 @@ export default function MakeNewPost(props){
 
                 
                     // Create post.
-                    const newPost = { text: trimmedPost, username: props.user.username, postPicture: response};
+                    const newPost = { text: trimmedPost, username: props.user.username, postPicture: response, userProfilePicture: props.user.profilePicture};
                     await createPost(newPost);
                 
                     // Add post to locally stored posts.

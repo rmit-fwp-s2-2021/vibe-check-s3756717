@@ -17,7 +17,8 @@ exports.create = async (req, res) => {
   const post = await db.post.create({
     text: req.body.text,
     username: req.body.username,
-    postPicture: req.body.postPicture
+    postPicture: req.body.postPicture,
+    userProfilePicture: req.body.userProfilePicture
   });
 
   res.json(post);
