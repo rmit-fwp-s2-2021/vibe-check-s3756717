@@ -47,6 +47,19 @@ async function createPost(post) {
   return response.data;
 }
 
+// --- Comment ---------------------------------------------------------------------------------------
+async function getComments(id) {
+  const response = await axios.get(API_HOST + "/api/comments");
+
+  return response.data;
+}
+
+async function createComment(comment) {
+  const response = await axios.post(API_HOST + "/api/comments", comment);
+
+  return response.data;
+}
+
 // --- Helper functions to interact with local storage --------------------------------------------
 function setUser(user) {
   const userItem = {username: user.username, first_name: user.first_name, last_name: user.last_name, password_hash: user.password_hash }
@@ -64,5 +77,6 @@ function removeUser() {
 export {
   verifyUser, findUser, createUser, updateUser,
   getPosts, createPost,
+  getComments, createComment,
   getUser, removeUser
 }

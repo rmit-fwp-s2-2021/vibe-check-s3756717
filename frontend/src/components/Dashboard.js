@@ -6,7 +6,8 @@ import React from "react";
 import SideBar from './SideBar';
 import LogOut from "./LogOutButton";
 import { useState, useEffect } from "react";
-import { getPosts } from "../data/repository";
+import { getPosts} from "../data/repository";
+import PostElement from './PostElement';
 
 export default function Dashboard(props){
     const [isLoading, setIsLoading] = useState(true);
@@ -22,15 +23,8 @@ export default function Dashboard(props){
         }
 
         loadPosts();
+
     }, []);
-
-    function postDetails(blobDetails) {
-        var binaryData = [];
-        binaryData.push(blobDetails);
-        const dataURL = URL.createObjectURL(new Blob(binaryData, {type: "image/png"}));
-
-        return dataURL;
-    }
 
 
     return(
@@ -55,18 +49,9 @@ export default function Dashboard(props){
                             to make your first post!</div>
                         </div>
                           :
-                          posts.map((x) =>
-                            
-                            <div className="postElement">
-                                <div className = "userText">
-                                    <img className = "userAvatar" src = {"data:image/jpeg;base64," + x.userProfilePicture} alt = "post"/>
-                                    <h2 className = "postName">{x.username}</h2>
-                                </div>
-                                <div className = "postView">
-                                    <img className = "postImg" src = {"data:image/jpeg;base64," + x.postPicture} alt = "post"/>
-                                    <div className = "postDesc"><p>{x.text}</p></div>
-                                </div>
-                            </div>
+                          posts.map((x) =>(
+                            <PostElement element = {x} />
+                          )
                           )
                       }
                 </div>

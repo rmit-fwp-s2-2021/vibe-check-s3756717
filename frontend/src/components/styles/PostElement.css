@@ -18,6 +18,7 @@
     margin-bottom: 20px;
     color: white;
     height: 70%;
+    width: 100%;
 }
 
 .postButtons{
@@ -123,8 +124,8 @@
 }
 
 .postImg{
-    height: 150px;
-    width: 150px;
+    height: 100%;
+    width: 50%;
     border-radius: 15%;
 }
 
@@ -136,5 +137,30 @@
     width: 50px;
     height: 50px;
     border-radius: 15%;
+}
+
+.commentsSection{
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.comment{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.commentText{
+    width: 50%;
+}
+
+.commentPost{
+    width: 70%;
+    margin-bottom: 20px;
+    border-radius: 5px;
 }
 

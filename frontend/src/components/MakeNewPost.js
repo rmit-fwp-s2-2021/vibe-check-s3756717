@@ -45,7 +45,7 @@ export default function MakeNewPost(props){
 
     const handleInputChange = (event) => {
         setPost(event.target.value);
-      };
+    };
     
       const handleSubmit = async (event) => {
           
