@@ -34,6 +34,12 @@ async function updateUser(user) {
   return response.data;
 }
 
+async function getUsers(){
+  const response = await axios.get(API_HOST + "/api/users");
+
+  return response.data;
+}
+
 // --- Post ---------------------------------------------------------------------------------------
 async function getPosts() {
   const response = await axios.get(API_HOST + "/api/posts");
@@ -48,7 +54,7 @@ async function createPost(post) {
 }
 
 // --- Comment ---------------------------------------------------------------------------------------
-async function getComments(id) {
+async function getComments() {
   const response = await axios.get(API_HOST + "/api/comments");
 
   return response.data;
@@ -56,6 +62,25 @@ async function getComments(id) {
 
 async function createComment(comment) {
   const response = await axios.post(API_HOST + "/api/comments", comment);
+
+  return response.data;
+}
+
+// --- Following ---------------------------------------------------------------------------------------
+async function getFollowing(id) {
+  const response = await axios.get(API_HOST + `/api/follow/select/${id}`);
+
+  return response.data;
+}
+
+async function addFollowing(follow) {
+  const response = await axios.post(API_HOST + "/api/follow", follow);
+
+  return response.data;
+}
+
+async function removeFollowing(username, followingUsername) {
+  const response = await axios.delete(API_HOST + "/api/follow", { params: { username, followingUsername } });
 
   return response.data;
 }
@@ -75,8 +100,9 @@ function removeUser() {
 }
 
 export {
-  verifyUser, findUser, createUser, updateUser,
+  verifyUser, findUser, createUser, updateUser, getUsers,
   getPosts, createPost,
   getComments, createComment,
-  getUser, removeUser
+  getUser, removeUser,
+  getFollowing, addFollowing, removeFollowing
 }

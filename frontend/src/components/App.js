@@ -8,6 +8,7 @@ import Forum from "./Forum";
 import { getUser, removeUser } from "../data/repository";
 import Dashboard from "./Dashboard";
 import MakeNewPost from "./MakeNewPost";
+import FollowingSection from "./FollowingSection";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -33,6 +34,9 @@ export default function App() {
               </Route>
               <Route path="/login">
                 <Login loginUser={loginUser} />
+              </Route>
+              <Route path = "/following">
+                <FollowingSection user = {user} />
               </Route>
               <Route path = "/make">
                 <MakeNewPost user = {user}/>

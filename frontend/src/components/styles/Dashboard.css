@@ -119,3 +119,62 @@
     background: #23232f;
     border-radius: 15px;
 }
+
+.usersSection{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    color: white
+}
+
+.userList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #30303c;
+    border-radius: 5px;
+}
+
+.followObject{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.followBtn{
+    margin-left: 20px;
+    background: none;
+    color: green;
+    border: solid;
+    border-width: 0.5px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.followBtn:hover{
+    background: green;
+    color: #30303c;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.unFollowBtn{
+    margin-left: 20px;
+    background: none;
+    color: red;
+    border: solid;
+    border-width: 0.5px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.unFollowBtn:hover{
+    background: red;
+    color: #30303c;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+}
