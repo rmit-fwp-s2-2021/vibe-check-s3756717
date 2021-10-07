@@ -9,10 +9,6 @@ module.exports = (sequelize, DataTypes) =>
       type: DataTypes.STRING(600),
       allowNull: true
     },
-    userProfilePicture: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
     username: {
       type: DataTypes.STRING(32),
       allowNull: false

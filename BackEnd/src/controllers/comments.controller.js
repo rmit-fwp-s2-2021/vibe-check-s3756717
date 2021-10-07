@@ -14,8 +14,6 @@ exports.create = async (req, res) => {
       commentText: req.body.commentText,
       post_id: req.body.post_id,
       username: req.body.username,
-      postPicture: req.body.postPicture,
-      userProfilePicture: req.body.userProfilePicture
     });
   
     res.json(comment);
