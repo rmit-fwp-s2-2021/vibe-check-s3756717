@@ -1,6 +1,19 @@
-import { addFollowing, getUser } from "../data/repository";
+import { addFollowing, getUser, findUser } from "../data/repository";
+import { useState, useEffect } from "react";
 
 const FollowObject = ({ element }) => {
+    const [userPP, setUserPP] = useState("");
+
+    useEffect(() => {
+        async function loadUser() {
+            const user = await findUser(element);
+            const currentUserPP = user.profilePicture;
+            setUserPP(currentUserPP);
+            console.log(userPP);
+        }
+        loadUser();
+
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -13,9 +26,12 @@ const FollowObject = ({ element }) => {
         window.location.reload();
     }
 
+    
+
     return(
         <div className = "followObject">
-            <div>{element}</div>
+            <img className = "userAvatar" src = {"data:image/jpeg;base64," + userPP} />
+            <div className = "userFollowText">{element}</div>
             <button className = "followBtn" onClick = {handleSubmit}>Follow</button>
         </div>
     );

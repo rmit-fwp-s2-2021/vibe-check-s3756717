@@ -9,7 +9,6 @@ const PostElement = ({ element }) => {
     const[comments, setComments] = useState([]);
     const[commentText, setCommentText] = useState("");
     const [errorMessage, setErrorMessage] = useState(null);
-    const history = useHistory();
 
     useEffect(() => {
         async function loadComments() {

@@ -1,11 +1,23 @@
-import { removeFollowing, getUser } from "../data/repository";
+import { removeFollowing, getUser, findUser } from "../data/repository";
+import { useState, useEffect } from "react";
 
 const UnfollowObject = ({ element }) => {
 
+    const [userPP, setUserPP] = useState("");
+
+    useEffect(() => {
+        async function loadUser() {
+            const user = await findUser(element);
+            const currentUserPP = user.profilePicture;
+            setUserPP(currentUserPP);
+            console.log(userPP);
+        }
+        loadUser();
+
+    }, []);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(getUser().username);
-        const newFollower = { username: getUser().username, followingUsername: element};
 
         await removeFollowing(getUser().username, element);
 
@@ -15,7 +27,8 @@ const UnfollowObject = ({ element }) => {
 
     return(
         <div className = "followObject">
-            <div>{element}</div>
+            <img className = "userAvatar" src = {"data:image/jpeg;base64," + userPP} />
+            <div className = "userFollowText">{element}</div>
             <button className = "unFollowBtn" onClick = {handleSubmit}>Unfollow</button>
         </div>
     );

@@ -141,6 +141,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    align-items: center;
 }
 
 .followBtn{
@@ -177,4 +178,7 @@
     border: none;
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
+}
+.userFollowText{
+    margin-left: 20px;
 }

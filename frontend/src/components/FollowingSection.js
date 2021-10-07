@@ -26,6 +26,7 @@ export default function FollowingSection(props){
             const currentFollowing = await getFollowing(props.user.username);
     
             setFollowing(currentFollowing);
+            setIsLoading(false);
         }
 
         loadUsers();
@@ -70,7 +71,9 @@ export default function FollowingSection(props){
 
                         <div className = "userList">
                         <h3>Following</h3>
-                        {
+                        {isLoading ?
+                            <div className = "noPosts">Loading users...</div>
+                            :
                             followingUsernames.map((x) =>
                                 <UnfollowObject element = {x} />
                             )
