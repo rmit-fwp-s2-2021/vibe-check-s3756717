@@ -8,6 +8,9 @@ module.exports = (express, app) => {
   // Create a new post.
   router.post("/", controller.create);
 
+  //Update likes and dislikes
+  router.put("/", controller.likes);
+
   // Add routes to server.
   app.use("/api/posts", router);
 };

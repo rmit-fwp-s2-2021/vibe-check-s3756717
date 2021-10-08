@@ -53,6 +53,19 @@ async function createPost(post) {
   return response.data;
 }
 
+async function likePost(post) {
+  const response = await axios.put(API_HOST + "/api/posts", post);
+
+  return response.data;
+}
+
+async function disLikePost(post) {
+  const response = await axios.put(API_HOST + "/api/posts", post);
+
+  return response.data;
+}
+
+
 // --- Comment ---------------------------------------------------------------------------------------
 async function getComments() {
   const response = await axios.get(API_HOST + "/api/comments");
@@ -101,7 +114,7 @@ function removeUser() {
 
 export {
   verifyUser, findUser, createUser, updateUser, getUsers,
-  getPosts, createPost,
+  getPosts, createPost, likePost, disLikePost,
   getComments, createComment,
   getUser, removeUser,
   getFollowing, addFollowing, removeFollowing

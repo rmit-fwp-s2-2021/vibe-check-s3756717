@@ -1,14 +1,17 @@
 import './styles/Dashboard.css';
-import './styles/PostElement.css';
 import React from "react";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { createComment, getComments, getUser } from "../data/repository";
+import { createComment, getComments, getUser, likePost, disLikePost } from "../data/repository";
+import Like from './Like';
+import DisLike from './Dislike';
 
 const PostElement = ({ element }) => {
     const[comments, setComments] = useState([]);
     const[commentText, setCommentText] = useState("");
     const [errorMessage, setErrorMessage] = useState(null);
+    
+    
 
     useEffect(() => {
         async function loadComments() {
@@ -53,10 +56,18 @@ const PostElement = ({ element }) => {
 
     return(
         <div className="postElement">
-            <div className = "userText">
-                <img className = "userAvatar" id = "userAvatar" src = {"data:image/jpeg;base64," + element.userProfilePicture} alt = "post"/>
-                <h2 className = "postName">{element.username}</h2>
+            <div className = "postHeader">
+                <div className = "userText">
+                    <img className = "userAvatar" id = "userAvatar" src = {"data:image/jpeg;base64," + element.userProfilePicture} alt = "userPP"/>
+                    <h2 className = "postName" id = "postUsername">{element.username}</h2>
+                </div>
+
+                <div className = "userText">
+                    <Like element = {element}/>
+                    <DisLike element = {element} />
+                </div>
             </div>
+            
             <div className = "postView">
                 <img className = "postImg" src = {"data:image/jpeg;base64," + element.postPicture} alt = "post"/>
                 <h3 className = "postDesc">{element.text}</h3>

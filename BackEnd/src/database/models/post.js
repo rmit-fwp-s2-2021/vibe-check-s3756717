@@ -16,6 +16,12 @@ module.exports = (sequelize, DataTypes) =>
     userProfilePicture: {
       type: DataTypes.TEXT,
       allowNull: true
+    },
+    likes: {
+      type: DataTypes.INTEGER
+    },
+    dislikes: {
+      type: DataTypes.INTEGER
     }
   }, {
     // Don't add the timestamp attributes (updatedAt, createdAt).
