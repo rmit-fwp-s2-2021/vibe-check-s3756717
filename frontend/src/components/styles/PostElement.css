@@ -114,23 +114,30 @@
 }
 
 .postDesc{
-    height: 100%;
     width: 80%;
     word-break: break-all;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .postImg{
-    height: 100%;
-    width: 50%;
-    border-radius: 15%;
+    height: 90%;
+    width: 90%;
+    border-radius: 15px;
+    margin-bottom: 10px;
 }
 
 .postName{
     align-self: center;
+    color: white;
+}
+
+.commentsTitle{
+    margin-bottom: 0px;
+    font-weight: bold;
 }
 
 .userAvatar{
@@ -139,29 +146,53 @@
     border-radius: 15%;
 }
 
+.postInfo{
+    display: flex;
+    width: 100%;
+    margin-bottom: -10%;
+}
+
+.comments{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    padding: 10px;
+    background: #1c2c2c;
+    height: 70%;
+    border-radius: 15px;
+}
+
+
 .commentsSection{
     width: 100%;
     color: white;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 }
 
 .comment{
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: center;
     margin-bottom: 20px;
 }
 
-.commentText{
-    width: 50%;
+.commentForm{
+    display: flex;
+    width: 100%;
 }
 
 .commentPost{
-    width: 70%;
-    margin-bottom: 20px;
+    width: 85%;
     border-radius: 5px;
+    height: 40px;
+}
+
+.postComment{
+    width: 15%;
+    margin-left: 10px;
 }
 
 .postHeader{

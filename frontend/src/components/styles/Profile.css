@@ -49,16 +49,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.formInput{
-    width: 50%;
-    height: 30px;
-    border-radius: 15px;
-    background: #23232f;
-    border-style: none;
-    color: white;
-    font-family: 'Poppins', sans-serif;
-}
-
 .bottomRow{
     display: flex;
     width: 90%;

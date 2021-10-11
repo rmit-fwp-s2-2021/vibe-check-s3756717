@@ -67,35 +67,42 @@ const PostElement = ({ element }) => {
                     <DisLike element = {element} />
                 </div>
             </div>
-            
-            <div className = "postView">
-                <img className = "postImg" src = {"data:image/jpeg;base64," + element.postPicture} alt = "post"/>
-                <h3 className = "postDesc">{element.text}</h3>
+
+
+            <div className = "postInfo">
+                <div className = "postView">
+                    <img className = "postImg" src = {"data:image/jpeg;base64," + element.postPicture} alt = "post"/>
+                    <div className = "postDesc">{element.text}</div>
+                </div>
+                <div className = "comments">
+                    <h2 className = "postName">Comments</h2>
+                    <div className = "commentsSection">
+                        {comments.map((c) => {
+                            if(element.post_id == c.post_id){
+                                return(
+                                    <div className = "comment">
+                                        <div className = "commentText">
+                                            <div className = "postName commentsTitle">{c.username}    •</div>
+                                            <div class = "postName">{c.commentText}</div>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        }   
+                        )}
+                    </div>
+                </div>
             </div>
+
             <form className = "postView" onSubmit = {handleSubmit}>
-                <div className = "postName">Submit Comment</div>
-                <textarea className = "formInput commentPost" name = "commentText" id="post" value={commentText} onChange={handleInputChange} required></textarea>
-                {errorMessage !== null &&
-                    <div className="errorMessage">{errorMessage}</div>
-                }
-                <input className = "signUpButton signUp signUpHover" type="submit" value="Submit Comment" />
+                        <div className = "commentForm">
+                            <textarea className = "formInput commentPost" name = "commentText" id="post" value={commentText} onChange={handleInputChange} required></textarea>
+                            <input className = "signUpButton signUp signUpHover postComment" type="submit" value="Submit Comment" />
+                        </div>
+                        {errorMessage !== null &&
+                            <div className="errorMessage">{errorMessage}</div>
+                        }
             </form>
-            <div className = "commentsSection">
-                <h2 className = "postName">Comments</h2>
-                {comments.map((c) => {
-                    if(element.post_id == c.post_id){
-                        return(
-                            <div className = "comment">
-                                <div className = "commentText">
-                                    <h3 className = "postName">{c.username}    •</h3>
-                                    <div class = "postName">{c.commentText}</div>
-                                </div>
-                            </div>
-                        )
-                    }
-                }   
-                )}
-            </div>
         </div>
         );
 }

@@ -4,13 +4,30 @@ import LogOut from "./LogOutButton";
 import { useState, useEffect, useContext } from "react";
 import { Link} from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { findUser, updateUser } from "../data/repository";
+import { findUser, updateUser, getUser } from "../data/repository";
 import './styles/Profile.css';
 
 export default function MyProfile(props) {
-    const [fields, setFields] = useState(null);
+  const [fields, setFields] = useState({
+    first_name: "", last_name: "",  password: ""
+  });
   const [errors, setErrors] = useState({ });
+  const [userPP, setUserPP] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
+
+  // Set preview picture when profile picture is uploaded
+  useEffect(() => {
+    async function loadUserPP(){
+      const currentPP = await findUser(props.user.username);
+
+      setUserPP(currentPP.profilePicture);
+      setIsLoading(false);
+      console.log(currentPP.profilePicture);
+    }
+
+    loadUserPP();
+  }, [])
 
   // Ensure null is not used when setting fields.
   const setFieldsNullToEmpty = (currentFields) => {
@@ -36,9 +53,21 @@ export default function MyProfile(props) {
     const { trimmedFields, isValid } = handleValidation();
     if(!isValid)
       return;
+    
+    console.log(trimmedFields);
+
+    // set trimmed fields in object to submit to API
+
+    const first_name = trimmedFields.first_name;
+    const last_name = trimmedFields.last_name;
+    const password = trimmedFields.password;
+
+    const userObject = {username: props.user.username, firstname: first_name, lastname: last_name, password: password}
+
+    console.log(userObject);
 
     // Update profile.
-    const profile = await updateUser(trimmedFields);
+    const profile = await updateUser(userObject);
 
     // Show success message.
     alert(profile.first_name, profile.last_name, "Details are updated");
@@ -53,23 +82,17 @@ export default function MyProfile(props) {
 
     // let key = "first_name";
     // let field = trimmedFields[key];
-    // if(field === null)
-    //   currentErrors[key] = "First name is required.";
-    // else if(field.length > 40)
+    // if(field.length > 40)
     //   currentErrors[key] = "First name length cannot be greater than 40.";
 
     // key = "last_name";
     // field = trimmedFields[key];
-    // if(field === null)
-    //   currentErrors[key] = "Last name is required.";
-    // else if(field.length > 40)
+    // if(field.length > 40)
     //   currentErrors[key] = "Last name length cannot be greater than 40.";
 
     // key = "password";
-    // field = trimmedFields[key];
-    // if(field.length === 0)
-    // currentErrors[key] = "Password is required.";
-    // else if(field.length < 6)
+    // field = trimmedFields[key];;
+    // if(field.length < 6)
     // currentErrors[key] = "Password must contain at least 6 characters.";
 
     setErrors(currentErrors);
@@ -101,10 +124,8 @@ export default function MyProfile(props) {
     return trimmedFields;
   };
 
-  if(fields === null)
-    return null;
-    
-
+  // if(fields === null)
+  //   return null;
     return(
         <div className = "pageWrapper">
                 <SideBar/>
@@ -114,7 +135,11 @@ export default function MyProfile(props) {
                         <LogOut/>
                     </div>
                     <div className = "profileDetails">
-                        {/*<img className = "preview" src = {ppUrl} alt = "profile"/> */}
+                        {isLoading ?
+                          <div className = "noPosts">Loading Profile Picture...</div>
+                          :
+                          <img className = "preview" src = {"data:image/jpeg;base64," + userPP} alt = "profile"/>}
+                        <br></br>
                         <div className = "formLabel">{props.user.username}</div>
                         <div className = "formLabel">{props.user.first_name} {props.user.last_name}</div>
                     </div>
@@ -124,7 +149,6 @@ export default function MyProfile(props) {
                             <div className = "formLabel">Change Profile Picture</div>
                             <input type='file' onChange={onSelectFile} />
                         </div>*/}
-
                         <div className = "nameChange">
                             <div className = "formLabel">Change First Name</div>
                             <input name="first_name" id="first_name" placeholder = " Change First Name" className = "formInput"

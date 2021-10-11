@@ -46,9 +46,26 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
   const hash = await argon2.hash(req.body.password, { type: argon2.argon2id });
 
-  user.first_name = req.body.first_name;
-  user.last_name = req.body.last_name;
-  user.password = hash;
+  const currentUser = await db.user.findByPk(req.body.username);
+
+  if(req.body.firstname == null){
+    user.first_name = currentUser.firstname;
+  }
+
+  else if(req.body.lastname == null){
+    user.first_name = currentUser.lastname;
+  }
+
+  else if(req.body.password == null){
+    user.first_name = currentUser.password;
+  }
+
+  else{
+    user.first_name = req.body.first_name;
+    user.last_name = req.body.last_name;
+    user.password = hash;
+  }
+  
 
   await user.save();
 

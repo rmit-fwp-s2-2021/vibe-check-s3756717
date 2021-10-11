@@ -26,7 +26,7 @@ exports.create = async (req, res) => {
   res.json(post);
 };
 
-// Update Likes
+// Update Likes and Dislikes
 exports.likes = async (req, res) => {
   const post = await await db.post.findByPk(req.body.post_id);
   

@@ -18,7 +18,6 @@ const DisLike = ({ element }) => {
 
         const newDisLikes = dislikes + 1;
 
-        console.log(newDisLikes);
 
         const addDislike = {likes:element.likes, dislikes: newDisLikes, post_id: element.post_id};
 

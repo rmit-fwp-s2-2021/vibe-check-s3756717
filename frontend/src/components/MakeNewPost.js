@@ -5,7 +5,7 @@ import SideBar from "./SideBar";
 import LogOut from "./LogOutButton";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { getPosts, createPost } from "../data/repository";
+import { getPosts, createPost, findUser } from "../data/repository";
 import imageToBase64 from 'image-to-base64/browser';
 
 
@@ -15,12 +15,21 @@ export default function MakeNewPost(props){
     const [posts, setPosts] = useState([]);
     const [selectedFile, setSelectedFile] = useState();
     const [preview, setPreview] = useState();
+    const [userPP, setUserPP] = useState("");
     var postImg;
     const history = useHistory();
 
 
     // Set preview for selected post image
     useEffect(() => {
+        async function loadUser(){
+            const getCurrentUser = await findUser(props.user.username);
+
+            setUserPP(getCurrentUser.profilePicture);
+        }
+
+        loadUser();
+
         if (!selectedFile) {
             setPreview(undefined);
             return;
@@ -70,7 +79,7 @@ export default function MakeNewPost(props){
 
                 
                     // Create post.
-                    const newPost = { text: trimmedPost, username: props.user.username, postPicture: response, userProfilePicture: props.user.profilePicture};
+                    const newPost = { text: trimmedPost, username: props.user.username, postPicture: response, userProfilePicture: userPP};
                     await createPost(newPost);
                 
                     // Add post to locally stored posts.
