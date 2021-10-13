@@ -20,7 +20,7 @@ exports.one = async (req, res) => {
 exports.login = async (req, res) => {
   const user = await db.user.findByPk(req.query.username);
 
-  if(user === null || await argon2.verify(user.password_hash, req.query.password) === false)
+  if(user === null || await argon2.verify(user.password_hash, req.query.password) === false || user.blocked === 1)
     // Login failed.
     res.json(null);
   else
@@ -36,7 +36,8 @@ exports.create = async (req, res) => {
     password_hash: hash,
     first_name: req.body.firstname,
     last_name: req.body.lastname,
-    profilePicture: req.body.profilePicture
+    profilePicture: req.body.profilePicture,
+    blocked: req.body.blocked
   });
 
   res.json(user);

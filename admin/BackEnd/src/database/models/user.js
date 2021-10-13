@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) =>
     profilePicture: {
       type: DataTypes.TEXT,
       allowNull: false
+    },
+    blocked: {
+      type: DataTypes.BOOLEAN
     }
   }, {
     // Don't add the timestamp attributes (updatedAt, createdAt).

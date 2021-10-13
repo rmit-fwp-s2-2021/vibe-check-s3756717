@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import { deleteUser } from "../data/repository";
+import { deleteUser, blockUser } from "../data/repository";
 
 export default function User({element}){
     const handleDelete = async (username) => {
@@ -17,6 +17,30 @@ export default function User({element}){
         }
     };
 
+    console.log(element.blocked);
+
+    const handleBlock = async (username) => {
+      if(!window.confirm(`Are you sure you want to block ${username} ?`))
+          return;
+
+      await blockUser(username);
+
+      window.location.reload();
+    
+      alert(username + " has been blocked.");
+    }
+
+    const handleUnBlock = async (username) => {
+      if(!window.confirm(`Are you sure you want to unblock ${username} ?`))
+          return;
+
+      await blockUser(username);
+
+      window.location.reload();
+    
+      alert(username + " has been unblocked.");
+    }
+
     return(
         <tr key={element.username}>
             <td>{element.username}</td>
@@ -26,8 +50,12 @@ export default function User({element}){
             <Link className="btn btn-primary" to={`/edit/${element.username}`}>Edit</Link>
             </td>
             <td>
-            <button className="btn btn-danger" onClick={() => handleDelete(element.username)}>Delete</button>
+            {element.blocked === false?
+              <button className="btn btn-danger" onClick={() => handleBlock(element.username)}>Block</button>
+            :
+              <button className="btn btn-success" onClick={() => handleUnBlock(element.username)}>Unblock</button>}
             </td>
+            <td><button className="btn btn-danger" onClick={() => handleDelete(element.username)}>Delete</button></td>
         </tr>
     )
 }

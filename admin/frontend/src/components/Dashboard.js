@@ -49,6 +49,7 @@ export default function Dashboard(){
                     <th>Password</th>
                     <th></th>
                     <th></th>
+                    <th></th>
                     </tr>
                 </thead>
                 <tbody>

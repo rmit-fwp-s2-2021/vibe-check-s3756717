@@ -18,7 +18,8 @@ graphql.schema = buildSchema(`
     first_name: String,
     last_name: String,
     password_hash: String,
-    profilePicture: String
+    profilePicture: String,
+    blocked: Boolean
   }
 
   type Post {
@@ -66,6 +67,7 @@ graphql.schema = buildSchema(`
   # Mutations (modify data in the underlying data-source, i.e., the database).
   type Mutation {
     update_user(input: userInput): User,
+    block_user(username: String): User,
     delete_user(username: String): Boolean,
     update_post(input: postInput): Post
   }
@@ -97,6 +99,21 @@ graphql.root = {
     user.last_name = args.input.last_name;
     user.password_hash = hash;
 
+    await user.save();
+
+    return user;
+  },
+  block_user: async (args) => {
+    const user = await db.user.findByPk(args.username);
+
+    if(user.blocked === true){
+      user.blocked = false;
+    }
+
+    else if(user.blocked === false){
+      user.blocked = true;
+    }
+    
     await user.save();
 
     return user;

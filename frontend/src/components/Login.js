@@ -29,6 +29,13 @@ export default function Login(props) {
       return;
     }
 
+    if(user.blocked === true){
+      // Login failed because of admin has blocked account
+      setFields({ ...fields, password: "" });
+      setErrorMessage("You have been blocked by an admin.");
+      return;
+    }
+
     // Set user state.
     props.loginUser(user);
 

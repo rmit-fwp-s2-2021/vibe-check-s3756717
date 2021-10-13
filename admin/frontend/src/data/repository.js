@@ -13,7 +13,8 @@ async function getUsers() {
           password_hash,
           first_name,
           last_name,
-          profilePicture
+          profilePicture,
+          blocked
         }
       }
     `;
@@ -65,6 +66,23 @@ async function updateUser(user) {
     const data = await request(GRAPH_QL_URL, query, variables);
   
     return data.update_user;
+}
+
+async function blockUser(username){
+    const query = gql`
+    mutation ($username: String) {
+        block_user(username: $username){
+            blocked
+        }
+    }
+    `;
+
+    const variables = {username};
+
+    const data = await request(GRAPH_QL_URL, query, variables);
+  
+    return data.block_user;
+
 }
 
 async function deleteUser(username) {
@@ -125,7 +143,7 @@ async function updatePost(post) {
 }
 
 export {
-    getUsers, getUser, updateUser,deleteUser,
+    getUsers, getUser, updateUser,deleteUser, blockUser,
     getPosts, updatePost
 }
 

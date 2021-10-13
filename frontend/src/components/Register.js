@@ -61,7 +61,8 @@ export default function Register(props) {
               return;
 
             const userItem = {username: trimmedFields.username, firstname: trimmedFields.firstname, lastname: trimmedFields.lastname,
-                              password: trimmedFields.password,  confirmPassword: trimmedFields.confirmPassword, profilePicture: response}
+                              password: trimmedFields.password,  confirmPassword: trimmedFields.confirmPassword, profilePicture: response,
+                              blocked: false}
 
             // Create user.
             const user = await createUser(userItem);
