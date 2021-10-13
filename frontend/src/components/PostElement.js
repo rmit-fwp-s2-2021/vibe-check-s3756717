@@ -62,10 +62,17 @@ const PostElement = ({ element }) => {
                     <h2 className = "postName" id = "postUsername">{element.username}</h2>
                 </div>
 
+                {
+                 element.text === "**** This post has been deleted by the admin ***"?
+                 <div className = "userText">
+                 </div>
+                :
                 <div className = "userText">
                     <Like element = {element}/>
                     <DisLike element = {element} />
                 </div>
+
+                }
             </div>
 
 

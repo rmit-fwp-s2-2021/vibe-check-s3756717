@@ -119,6 +119,7 @@ graphql.root = {
     post.text = args.input.text;
     post.postPicture = args.input.postPicture;
 
+    await db.comment.destroy({ where: { post_id: args.input.post_id } });
     await post.save();
 
     return post;
