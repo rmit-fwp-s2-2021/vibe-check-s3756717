@@ -26,7 +26,7 @@ const Like = ({ element }) => {
         await likePost(addLike);
 
         alert("You liked " + element.username +"'s post!");
-        window.location.reload();
+        setLikes(newLikes);
     }
 
     return(

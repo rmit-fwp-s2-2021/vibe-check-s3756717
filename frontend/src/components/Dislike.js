@@ -24,7 +24,7 @@ const DisLike = ({ element }) => {
         await likePost(addDislike);
 
         alert("You disliked " + element.username +"'s post.");
-        window.location.reload();
+        setDislikes(newDisLikes);
     }
 
     return(

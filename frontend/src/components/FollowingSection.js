@@ -35,13 +35,7 @@ export default function FollowingSection(props){
 
     users.map((x) => userNames.push(x.username));
     following.map((x) => followingUsernames.push(x.followingUsername));
-
-    console.log(userNames);
-    console.log(followingUsernames);
-    
     exclusiveUsernameList = userNames.filter(function(obj) { return followingUsernames.indexOf(obj) == -1; });
-
-    console.log(exclusiveUsernameList);
 
     return(
         <div className = "pageWrapper">
