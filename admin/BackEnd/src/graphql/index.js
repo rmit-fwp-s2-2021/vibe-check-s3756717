@@ -92,13 +92,21 @@ graphql.root = {
   // Mutations.
   update_user: async (args) => {
     const user = await db.user.findByPk(args.input.username);
-    const hash = await argon2.hash(args.input.password, { type: argon2.argon2id });
-  
-    // Update user fields.
-    user.first_name = args.input.first_name;
-    user.last_name = args.input.last_name;
-    user.password_hash = hash;
 
+    if(args.input.password === user.password_hash){
+      user.first_name = args.input.first_name;
+      user.last_name = args.input.last_name;
+    }
+
+    else if(args.input.password != user.password_hash){
+      const hash = await argon2.hash(args.input.password, { type: argon2.argon2id });
+  
+      // Update user fields.
+      user.first_name = args.input.first_name;
+      user.last_name = args.input.last_name;
+      user.password_hash = hash;
+    }
+    
     await user.save();
 
     return user;

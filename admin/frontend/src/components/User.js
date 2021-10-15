@@ -7,8 +7,6 @@ export default function User({element}){
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({ });
     const [openEdit, setOpenEdit] = useState(false);
-    // Line that causes the issue
-    // const argon2 = require('argon2');
 
     useEffect(() => {
       async function loadUser() {
@@ -29,11 +27,6 @@ export default function User({element}){
         setOpenEdit(false);
     }
 
-    // const handlePasswordInput = async(event) =>{
-    //     const hash = await argon2.hash(event.target.value, { type: argon2.argon2id });
-    //     setPassword(hash);
-    // }
-
     const handleSubmit = async (event) => {
       event.preventDefault();
   
@@ -41,9 +34,12 @@ export default function User({element}){
       const { trimmedFields, isValid } = handleValidation();
       if(!isValid)
         return;
-  
+
+      const userUpdate = {username: element.username, first_name: trimmedFields.first_name, last_name: trimmedFields.last_name, password: trimmedFields.password};
+      
+      console.log(userUpdate);
       // Update user.
-      const user = await updateUser(trimmedFields);
+      await updateUser(userUpdate);
   
       // Show success message.
       alert(element.username + "'s details have been updated.")
@@ -97,8 +93,6 @@ export default function User({element}){
           alert(username + " has been deleted.");
         }
     };
-
-    console.log(element.blocked);
 
     const handleBlock = async (username) => {
       if(!window.confirm(`Are you sure you want to block ${username} ?`))
@@ -167,7 +161,7 @@ export default function User({element}){
                         <div className="form-group">
                           <label htmlFor="password" className="control-label">Password</label>
                           <input type = "password" name="password_hash" id="password_hash" className="form-control"
-                            value={password} onChange={(e) => setPassword((e.target.value).trim())} />
+                            value={password} onChange={(e) => setPassword((e.target.value))} />
                           {errors.password && <div className="text-danger">{errors.password}</div>}
                         </div>
                       </div>
