@@ -4,7 +4,6 @@ import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
 import MyProfile from "./MyProfile";
-import Forum from "./Forum";
 import { getUser, removeUser } from "../data/repository";
 import Dashboard from "./Dashboard";
 import MakeNewPost from "./MakeNewPost";
@@ -45,9 +44,6 @@ export default function App() {
               </Route>
               <Route path="/profile">
                 <MyProfile user={user} />
-              </Route>
-              <Route path="/forum">
-                <Forum user={user} />
               </Route>
               <Route path="/">
                 <Home />

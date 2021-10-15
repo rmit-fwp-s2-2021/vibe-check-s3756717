@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { findUser, createUser } from "../data/repository";
+import { findUser, createUser, setUser } from "../data/repository";
 import './styles/SignUp.css';
 import signUpPic from './addons/signUpPic.png';
 import Footer from './Footer';
@@ -69,6 +69,10 @@ export default function Register(props) {
 
             // Set user state.
             props.loginUser(user);
+
+            // Set user in session variables
+            setUser(user);
+
 
             // Navigate to the home page.
             history.push("/dashboard");
