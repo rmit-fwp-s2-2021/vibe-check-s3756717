@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { verifyUser } from "../data/repository";
+import { verifyUser, addLoginEntry } from "../data/repository";
 import {
   Link
 } from "react-router-dom";
@@ -38,6 +38,9 @@ export default function Login(props) {
 
     // Set user state.
     props.loginUser(user);
+    const loginEntry = {username: fields.username};
+    addLoginEntry(loginEntry);
+
 
     // Navigate to the home page.
     history.push("/dashboard");

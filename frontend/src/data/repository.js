@@ -98,6 +98,14 @@ async function removeFollowing(username, followingUsername) {
   return response.data;
 }
 
+// --- LoginEntries ---------------------------------------------------------------------------------------
+
+async function addLoginEntry(login){
+  const response = await axios.post(API_HOST + "/api/loginEntries", login);
+
+  return response.data;
+}
+
 // --- Helper functions to interact with local storage --------------------------------------------
 function setUser(user) {
   const userItem = {username: user.username, first_name: user.first_name, last_name: user.last_name, password_hash: user.password_hash }
@@ -116,6 +124,7 @@ export {
   verifyUser, findUser, createUser, updateUser, getUsers,
   getPosts, createPost, likePost, disLikePost,
   getComments, createComment,
+  addLoginEntry,
   getUser, removeUser, setUser,
   getFollowing, addFollowing, removeFollowing
 }

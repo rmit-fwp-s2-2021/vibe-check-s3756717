@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { findUser, createUser, setUser } from "../data/repository";
+import { findUser, createUser, setUser, addLoginEntry } from "../data/repository";
 import './styles/SignUp.css';
 import signUpPic from './addons/signUpPic.png';
 import Footer from './Footer';
@@ -73,6 +73,8 @@ export default function Register(props) {
             // Set user in session variables
             setUser(user);
 
+            const loginEntry = {username: fields.username};
+            addLoginEntry(loginEntry);
 
             // Navigate to the home page.
             history.push("/dashboard");
