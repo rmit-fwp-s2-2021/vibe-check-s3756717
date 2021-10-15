@@ -1,4 +1,3 @@
-import {Link} from "react-router-dom";
 import { deleteUser, blockUser, getUser, updateUser } from "../data/repository";
 import { useState, useEffect } from "react";
 
@@ -8,6 +7,7 @@ export default function User({element}){
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({ });
     const [openEdit, setOpenEdit] = useState(false);
+    // Line that causes the issue
     // const argon2 = require('argon2');
 
     useEffect(() => {
