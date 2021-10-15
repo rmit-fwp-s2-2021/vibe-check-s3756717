@@ -81,6 +81,10 @@ const PostElement = ({ element }) => {
                     <img className = "postImg" src = {"data:image/jpeg;base64," + element.postPicture} alt = "post"/>
                     <div className = "postDesc">{element.text}</div>
                 </div>
+
+                {element.text === "**** This post has been deleted by the admin ***"?
+                <div></div>
+                :
                 <div className = "comments">
                     <h2 className = "postName">Comments</h2>
                     <div className = "commentsSection">
@@ -98,9 +102,12 @@ const PostElement = ({ element }) => {
                         }   
                         )}
                     </div>
-                </div>
+                </div>}
             </div>
-
+            
+            {element.text === "**** This post has been deleted by the admin ***"?
+            <div></div>
+            :
             <form className = "postView" onSubmit = {handleSubmit}>
                         <div className = "commentForm">
                             <textarea className = "formInput commentPost" name = "commentText" id="post" value={commentText} onChange={handleInputChange} required></textarea>
@@ -110,6 +117,7 @@ const PostElement = ({ element }) => {
                             <div className="errorMessage">{errorMessage}</div>
                         }
             </form>
+            }
         </div>
         );
 }

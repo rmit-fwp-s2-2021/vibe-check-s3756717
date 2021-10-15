@@ -116,6 +116,6 @@ export {
   verifyUser, findUser, createUser, updateUser, getUsers,
   getPosts, createPost, likePost, disLikePost,
   getComments, createComment,
-  getUser, removeUser,
+  getUser, removeUser, setUser,
   getFollowing, addFollowing, removeFollowing
 }

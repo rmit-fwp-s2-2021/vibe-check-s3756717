@@ -25,7 +25,6 @@ export default function App() {
   return (
     <div className="App">
       <Router>
-        {/* <Navbar user={user} logoutUser={logoutUser} /> */}
         <main role="main">
           <div className="container my-3">
             <Switch>

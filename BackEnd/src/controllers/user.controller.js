@@ -45,29 +45,23 @@ exports.create = async (req, res) => {
 
 // Update a user in the database
 exports.update = async (req, res) => {
-  const hash = await argon2.hash(req.body.password, { type: argon2.argon2id });
+  const user = await db.user.findByPk(req.body.username);
 
-  const currentUser = await db.user.findByPk(req.body.username);
-
-  if(req.body.firstname == null){
-    user.first_name = currentUser.firstname;
-  }
-
-  else if(req.body.lastname == null){
-    user.first_name = currentUser.lastname;
-  }
-
-  else if(req.body.password == null){
-    user.first_name = currentUser.password;
-  }
-
-  else{
+  if(req.body.password === user.password_hash){
     user.first_name = req.body.first_name;
     user.last_name = req.body.last_name;
-    user.password = hash;
+  }
+
+  else if(req.body.password != user.password_hash){
+    const hash = await argon2.hash(req.body.password, { type: argon2.argon2id });
+
+    // Update user fields.
+    user.first_name = req.body.first_name;
+    user.last_name = req.body.last_name;
+    user.password_hash = hash;
   }
   
-
+  
   await user.save();
 
   res.json(user);
