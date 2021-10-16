@@ -142,6 +142,25 @@ async function updatePost(post) {
     return data.update_post;
 }
 
+async function getMostPopularPost() {
+  const query = gql`
+  {
+    most_popular_post {
+      post_id
+      text
+      username
+      postPicture
+      likes
+      dislikes
+    }
+  }
+  `;
+
+  const data = await request(GRAPH_QL_URL, query);
+  
+  return data.most_popular_post;
+}
+
 // --- Following ---------------------------------------------------------------------------------------
 
 async function countFollowing(){
@@ -181,7 +200,7 @@ async function getLoginEntries() {
 
 export {
     getUsers, getUser, updateUser,deleteUser, blockUser,
-    getPosts, updatePost,
+    getPosts, updatePost, getMostPopularPost,
     countFollowing,
     getLoginEntries
 }

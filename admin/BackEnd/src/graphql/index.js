@@ -2,6 +2,7 @@ const { buildSchema } = require("graphql");
 const db = require("../database");
 const argon2 = require("argon2");
 const follow = require("../database/models/follow");
+const post = require("../database/models/post");
 
 const graphql = { };
 
@@ -71,6 +72,7 @@ graphql.schema = buildSchema(`
     all_posts: [Post],
     loginEntries: [Login],
     count_following: [Follow],
+    most_popular_post: Post,
     user(username: String): User,
     post(username: String): Post,
   }
@@ -104,6 +106,12 @@ graphql.root = {
   },
   count_following: async () => {
     return await db.follow.findAll();
+  },
+  most_popular_post: async () => {
+    const mostLikes = await db.post.max('likes');
+    return await db.post.findOne({
+      where: { likes: mostLikes} 
+    });
   },
 
 

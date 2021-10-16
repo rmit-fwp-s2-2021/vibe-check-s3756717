@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from 'react';
-import { getLoginEntries, getUsers, countFollowing } from "../data/repository";
+import { getLoginEntries, getUsers, countFollowing, getMostPopularPost } from "../data/repository";
 import { Bar } from "react-chartjs-2";
 
 
@@ -9,7 +9,7 @@ export default function Statistics(){
     const [users, setUsers] = useState([]);
     const last5days = getLast5Dates();
     const [userFollowing, setUserFollowing] = useState([]);
-    const [username, setUsername] = useState([]);
+    const [mostPopular, setMostPopular] = useState({});
     var usersFollowingArray = [];
     var userUsernames = [];
     var day1 = 0;
@@ -37,7 +37,13 @@ export default function Statistics(){
             setUserFollowing(currentFollowing);
         };
 
-        
+        const loadMostPopularPost = async () => {
+            const currentPost = await getMostPopularPost();
+
+            setMostPopular(currentPost);
+        }
+
+        loadMostPopularPost();
         loadFollowing();
         loadUsers();
         loadLoginEntries();
@@ -113,7 +119,7 @@ export default function Statistics(){
         labels: [last5days[4], last5days[3], last5days[2], last5days[1], last5days[0]],
         datasets: [
           {
-            label: "Number of users using Vibe Check in the last 5 days",
+            label: "Number of users using Vibe Check on this day",
             data: [day5, day4, day3, day2, day1],
             backgroundColor: 'rgba(75,192,192,1)',
             borderWidth: 1,
@@ -157,9 +163,27 @@ export default function Statistics(){
                     <Bar data={userFollowingData} style={{ maxHeight: '300px'}}/>
                 </div>
             </div>
+            <br></br>
+            <div className = "card">
+                <h3 class="card-header">Most Popular Post</h3>
+                <img src = {"data:image/jpeg;base64," + mostPopular.postPicture} class = "img-thumbnail"></img>
+                <div className = "card-body">
+                    <div className = "d-flex justify-content-between">
+                        <h5 className = "card-text">By {mostPopular.username}</h5>
+                        <div className = "card-text">Likes: {mostPopular.likes}</div>
+                    </div>
+                    
+                    <div className = "d-flex justify-content-between">
+                        <div></div>
+                        <div></div>
+                        <div className = "card-text">Dislikes: {mostPopular.dislikes}</div>
+                    </div>
 
-
-
+                    <h4 className = "card-title text-center">{mostPopular.text}</h4>
+                    
+                </div>
+                
+            </div>
         </div>
     );
 }
