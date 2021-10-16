@@ -4,4 +4,5 @@ module.exports = {
   PASSWORD: "Karandulena@123",
   DB: "s3756717_fwp_a2",
   DIALECT: "mysql",
+  TIMEZONE: "+05:30",
 };
