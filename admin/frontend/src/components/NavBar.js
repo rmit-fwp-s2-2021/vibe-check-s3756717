@@ -18,7 +18,7 @@ export default function NavBar(){
                             <Link className="nav-link" to="/posts"><h4>Posts</h4></Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/"><h4>Statistics</h4></Link>
+                            <Link className="nav-link" to="/stats"><h4>Statistics</h4></Link>
                         </li>
                     </ul>
                 </div>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBar from './components/NavBar';
 import Posts from './components/Posts';
+import Statistics from './components/Statistics';
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
           <main role="main">
             <div className="container my-3">
               <Switch>
+                <Route path = "/stats">
+                  <Statistics />
+                </Route>
                 <Route path = "/posts">
                     <Posts />
                 </Route>

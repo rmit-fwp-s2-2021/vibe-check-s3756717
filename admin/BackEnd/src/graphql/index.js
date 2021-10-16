@@ -1,6 +1,7 @@
 const { buildSchema } = require("graphql");
 const db = require("../database");
 const argon2 = require("argon2");
+const follow = require("../database/models/follow");
 
 const graphql = { };
 
@@ -40,6 +41,14 @@ graphql.schema = buildSchema(`
   type Follow {
     follow_id: Int,
     followingUsername: String
+    username: String
+  }
+
+  scalar DateTime
+  type Login {
+    login_id: Int,
+    username: String,
+    createdAt: DateTime
   }
 
   # The input type can be used for incoming data.
@@ -60,8 +69,10 @@ graphql.schema = buildSchema(`
   type Query {
     all_users: [User],
     all_posts: [Post],
+    loginEntries: [Login],
+    count_following: [Follow],
     user(username: String): User,
-    post(username: String): Post
+    post(username: String): Post,
   }
 
   # Mutations (modify data in the underlying data-source, i.e., the database).
@@ -88,6 +99,13 @@ graphql.root = {
   post: async (args) => {
     return await db.post.findByPk(args.post_id);
   },
+  loginEntries: async () => {
+    return await db.login.findAll();
+  },
+  count_following: async () => {
+    return await db.follow.findAll();
+  },
+
 
   // Mutations.
   update_user: async (args) => {

@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) =>
       allowNull: false
     },
     blocked: {
-      type: DataTypes.BOOLEAN
+      type:DataTypes.BOOLEAN
     }
   }, {
     // Don't add the timestamp attributes (updatedAt, createdAt).

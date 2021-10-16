@@ -142,9 +142,48 @@ async function updatePost(post) {
     return data.update_post;
 }
 
+// --- Following ---------------------------------------------------------------------------------------
+
+async function countFollowing(){
+  const query = gql`
+    {
+      count_following{
+        follow_id,
+        followingUsername,
+        username
+      }
+    }
+    `;
+
+    const data = await request(GRAPH_QL_URL, query);
+  
+    return data.count_following;
+}
+
+// --- LoginEntries ---------------------------------------------------------------------------------------
+
+async function getLoginEntries() {
+  // Simply query with no parameters.
+  const query = gql`
+    {
+      loginEntries {
+        login_id,
+        username,
+        createdAt
+      }
+    }
+  `;
+
+  const data = await request(GRAPH_QL_URL, query);
+
+  return data.loginEntries;
+}
+
 export {
     getUsers, getUser, updateUser,deleteUser, blockUser,
-    getPosts, updatePost
+    getPosts, updatePost,
+    countFollowing,
+    getLoginEntries
 }
 
 

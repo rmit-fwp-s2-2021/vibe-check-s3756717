@@ -16,6 +16,7 @@ db.user = require("./models/user.js")(db.sequelize, DataTypes);
 db.post = require("./models/post.js")(db.sequelize, DataTypes);
 db.comment = require("./models/comment.js")(db.sequelize, DataTypes);
 db.follow = require("./models/follow.js")(db.sequelize, DataTypes);
+db.login = require("./models/login.js")(db.sequelize, DataTypes);
 
 // Relate post and user.
 db.post.belongsTo(db.user, { foreignKey: { name: "username", allowNull: false } });
@@ -25,6 +26,9 @@ db.comment.belongsTo(db.post, {foreignKey: { name: "post_id", allowNull: false }
 
 // Relate following and user.
 db.follow.belongsTo(db.user, { foreignKey: { name: "username", allowNull: false } });
+
+// Relate loginEntry and user
+db.login.belongsTo(db.user, {foreignKey: { name: "username", allowNull: false }});
 
 // Learn more about associations here: https://sequelize.org/master/manual/assocs.html
 
