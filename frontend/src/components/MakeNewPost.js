@@ -129,6 +129,9 @@ export default function MakeNewPost(props){
                             {selectedFile &&  <img className = "preview" src={preview} alt = "new post"/>}
                         </div>
                     </div>
+                    {errorMessage !== null &&
+                        <div className="errorMessage">{errorMessage}</div>
+                    }
                     <br></br>
                     <input className = "signUpButton signUp signUpHover" type="submit" value="Check my Vibe!" />
                 </form>

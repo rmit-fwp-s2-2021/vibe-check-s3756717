@@ -146,7 +146,7 @@ export default function Statistics(){
         <div>
             <div className = "row">
                 <div className = "container">
-                    <h1>Posts</h1>
+                    <h1>Statistics</h1>
                 </div>
             </div>
             <br></br>
