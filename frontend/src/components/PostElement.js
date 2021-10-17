@@ -44,10 +44,6 @@ const PostElement = ({ element }) => {
             return;
         }
 
-        console.log(trimmedComment);
-        console.log(element.post_id);
-        console.log(getUser().username);
-
         // Submit comment details to database
         const newComment = { commentText: trimmedComment, username: getUser().username,  post_id: element.post_id};
         await createComment(newComment);

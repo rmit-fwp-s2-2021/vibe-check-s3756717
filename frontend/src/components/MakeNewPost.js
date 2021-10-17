@@ -37,7 +37,6 @@ export default function MakeNewPost(props){
 
         const objectUrl = URL.createObjectURL(selectedFile);
         setPreview(objectUrl);
-        console.log(preview);
 
         return () => URL.revokeObjectURL(objectUrl);
     }, [selectedFile])
@@ -49,7 +48,6 @@ export default function MakeNewPost(props){
             return;
         }
         setSelectedFile(e.target.files[0]);
-        console.log(selectedFile);
     }
 
     const handleInputChange = (event) => {

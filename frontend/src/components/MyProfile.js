@@ -41,8 +41,6 @@ export default function MyProfile(props) {
     const { trimmedFields, isValid } = handleValidation();
     if(!isValid)
       return;
-    
-    console.log(trimmedFields);
 
     // set trimmed fields in object to submit to API
     const first_name = trimmedFields.first_name;
@@ -50,8 +48,6 @@ export default function MyProfile(props) {
     const password = trimmedFields.password;
 
     const userObject = {username: props.user.username, first_name: first_name, last_name: last_name, password: password}
-
-    console.log(userObject);
 
     // Update profile.
     const profile = await updateUser(userObject);

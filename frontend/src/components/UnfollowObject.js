@@ -13,7 +13,6 @@ const UnfollowObject = ({ element }) => {
             const user = await findUser(element);
             const currentUserPP = user.profilePicture;
             setUserPP(currentUserPP);
-            console.log(userPP);
         }
         loadUser();
 

@@ -22,9 +22,6 @@ const Like = ({ element }) => {
 
         const newLikes = likes + 1;
 
-        console.log(newLikes);
-        console.log(element.post_id);
-
         const addLike = {likes: newLikes, dislikes: element.dislikes, post_id: element.post_id};
 
         await likePost(addLike);

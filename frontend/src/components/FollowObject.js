@@ -12,7 +12,6 @@ const FollowObject = ({ element }) => {
             const user = await findUser(element);
             const currentUserPP = user.profilePicture;
             setUserPP(currentUserPP);
-            console.log(userPP);
         }
         loadUser();
 
@@ -21,7 +20,6 @@ const FollowObject = ({ element }) => {
     // Add selected user to following list of logged in user
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(element);
         const newFollower = { username: getUser().username, followingUsername: element,};
 
         await addFollowing(newFollower);
