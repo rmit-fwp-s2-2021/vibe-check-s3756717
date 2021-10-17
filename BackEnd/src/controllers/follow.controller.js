@@ -24,6 +24,7 @@ exports.create = async (req, res) => {
     res.json(following);
   };
 
+// Remove following user from database for relevant user
 exports.delete = async (req, res) => {
   const following = await db.follow.destroy(
     {

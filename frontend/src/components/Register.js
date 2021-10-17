@@ -1,3 +1,5 @@
+/* REGISTER - Register for Vibe Check */
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -72,7 +74,8 @@ export default function Register(props) {
 
             // Set user in session variables
             setUser(user);
-
+            
+            // Add login entry to logins table to use for admin statistics
             const loginEntry = {username: fields.username};
             addLoginEntry(loginEntry);
 

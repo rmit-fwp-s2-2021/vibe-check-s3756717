@@ -170,6 +170,7 @@ graphql.root = {
     post.text = args.input.text;
     post.postPicture = args.input.postPicture;
 
+    // Delete comments of post that is blocked by user
     await db.comment.destroy({ where: { post_id: args.input.post_id } });
     await post.save();
 

@@ -1,3 +1,5 @@
+/* MY PROFILE - Show logged in user's profile details and let user change their details */
+
 import React from "react";
 import SideBar from './SideBar';
 import LogOut from "./LogOutButton";
@@ -16,7 +18,7 @@ export default function MyProfile(props) {
   const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
 
-  // Set preview picture when profile picture is uploaded
+  // Load logged in user details
   useEffect(() => {
     async function loadUser(){
       const currentPP = await findUser(props.user.username);
@@ -31,6 +33,7 @@ export default function MyProfile(props) {
     loadUser();
   }, [])
 
+  // Update user details
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -63,6 +66,7 @@ export default function MyProfile(props) {
     window.location.reload();
   };
 
+  // Validation for update profile fields
   const handleValidation = () => {
     const trimmedFields = {first_name: firstName, last_name: lastName, password: password};
     const currentErrors = { };

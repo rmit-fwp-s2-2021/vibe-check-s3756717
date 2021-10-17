@@ -5,7 +5,7 @@ import SideBar from "./SideBar";
 import LogOut from "./LogOutButton";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { getPosts, createPost, findUser } from "../data/repository";
+import { createPost, findUser } from "../data/repository";
 import imageToBase64 from 'image-to-base64/browser';
 
 

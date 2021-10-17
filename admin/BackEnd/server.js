@@ -10,6 +10,7 @@ db.sync();
 const app = express();
 
 // Parse requests of content-type - application/json.
+// Limit has been increased to handle base64 strings.
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 

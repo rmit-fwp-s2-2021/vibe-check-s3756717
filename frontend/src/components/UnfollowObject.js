@@ -1,3 +1,5 @@
+/* UNFOLLOW OBJECT - Functionality for user to unfollow another user */
+
 import { removeFollowing, getUser, findUser } from "../data/repository";
 import { useState, useEffect } from "react";
 
@@ -5,6 +7,7 @@ const UnfollowObject = ({ element }) => {
 
     const [userPP, setUserPP] = useState("");
 
+    // Load users to unfollow
     useEffect(() => {
         async function loadUser() {
             const user = await findUser(element);
@@ -16,6 +19,7 @@ const UnfollowObject = ({ element }) => {
 
     }, []);
 
+    // Unfollow passed on user
     const handleSubmit = async (event) => {
         event.preventDefault();
 

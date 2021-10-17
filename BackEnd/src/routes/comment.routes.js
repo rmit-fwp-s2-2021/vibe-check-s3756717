@@ -5,7 +5,7 @@ module.exports = (express, app) => {
     // Select comments with post_id
     router.get("/", controller.all);
   
-    // Create a new post.
+    // Create a new comment.
     router.post("/", controller.create);
   
     // Add routes to server.

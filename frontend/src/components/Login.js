@@ -1,3 +1,5 @@
+/* LOGIN - Login page for user to use Vibe Check Services */
+
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { verifyUser, addLoginEntry } from "../data/repository";
@@ -17,6 +19,7 @@ export default function Login(props) {
     setFields({ ...fields, [event.target.name]: event.target.value });
   };
 
+  // Login functionality
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -30,7 +33,7 @@ export default function Login(props) {
     }
 
     if(user.blocked === true){
-      // Login failed because of admin has blocked account
+      // Login failed because admin has blocked account
       setFields({ ...fields, password: "" });
       setErrorMessage("You have been blocked by an admin.");
       return;
@@ -38,6 +41,8 @@ export default function Login(props) {
 
     // Set user state.
     props.loginUser(user);
+
+    // Add login entry to logins table to use for admin statistics
     const loginEntry = {username: fields.username};
     addLoginEntry(loginEntry);
 

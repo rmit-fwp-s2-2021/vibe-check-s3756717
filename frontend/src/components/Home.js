@@ -1,3 +1,5 @@
+/* HOME PAGE - Landing page for user to read website introduction and instructions */
+
 import React from "react";
 import logo from "../logo.svg";
 import './styles/Landing.css';

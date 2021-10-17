@@ -1,8 +1,9 @@
+/* POST ELEMENT - Post element to show individual post's details on logged in user's field */
+
 import './styles/Dashboard.css';
 import React from "react";
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router";
-import { createComment, getComments, getUser, likePost, disLikePost } from "../data/repository";
+import { createComment, getComments, getUser} from "../data/repository";
 import Like from './Like';
 import DisLike from './Dislike';
 
@@ -12,7 +13,7 @@ const PostElement = ({ element }) => {
     const [errorMessage, setErrorMessage] = useState(null);
     
     
-
+    // Load comments for post
     useEffect(() => {
         async function loadComments() {
             const currentComments = await getComments();
@@ -23,10 +24,12 @@ const PostElement = ({ element }) => {
 
     }, []);
 
+    // Generic input handler
     const handleInputChange = (event) => {
         setCommentText(event.target.value);
     };
 
+    // Submit comment
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -45,9 +48,11 @@ const PostElement = ({ element }) => {
         console.log(element.post_id);
         console.log(getUser().username);
 
+        // Submit comment details to database
         const newComment = { commentText: trimmedComment, username: getUser().username,  post_id: element.post_id};
         await createComment(newComment);
 
+        // Notify User
         alert("Comment submitted!");
 
         setErrorMessage("");

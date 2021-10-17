@@ -1,9 +1,12 @@
+/* FOLLOW OBJECT - Functionality for user to follow another user */
+
 import { addFollowing, getUser, findUser } from "../data/repository";
 import { useState, useEffect } from "react";
 
 const FollowObject = ({ element }) => {
     const [userPP, setUserPP] = useState("");
 
+    // Set user profile picture for passed on user object
     useEffect(() => {
         async function loadUser() {
             const user = await findUser(element);
@@ -15,6 +18,7 @@ const FollowObject = ({ element }) => {
 
     }, []);
 
+    // Add selected user to following list of logged in user
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(element);

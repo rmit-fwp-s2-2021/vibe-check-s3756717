@@ -47,11 +47,13 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
   const user = await db.user.findByPk(req.body.username);
 
+  // If password has not been changed, only update first and last names
   if(req.body.password === user.password_hash){
     user.first_name = req.body.first_name;
     user.last_name = req.body.last_name;
   }
 
+  // If password has been changed, hash changed password and update all details
   else if(req.body.password != user.password_hash){
     const hash = await argon2.hash(req.body.password, { type: argon2.argon2id });
 

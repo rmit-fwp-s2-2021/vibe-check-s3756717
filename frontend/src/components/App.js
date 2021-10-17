@@ -16,11 +16,6 @@ export default function App() {
     setUser(user);
   };
 
-  const logoutUser = () => {
-    removeUser();
-    setUser(null);
-  };
-
   return (
     <div className="App">
       <Router>

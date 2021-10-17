@@ -27,7 +27,7 @@ db.comment.belongsTo(db.post, {foreignKey: { name: "post_id", allowNull: false }
 // Relate following and user.
 db.follow.belongsTo(db.user, { foreignKey: { name: "username", allowNull: false } });
 
-// Relate loginEntry and user
+// Relate loginEntry and user.
 db.login.belongsTo(db.user, {foreignKey: { name: "username", allowNull: false }});
 
 // Learn more about associations here: https://sequelize.org/master/manual/assocs.html

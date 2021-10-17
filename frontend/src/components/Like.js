@@ -1,3 +1,5 @@
+/* LIKE - Like a passed on post */
+
 import like from './addons/like.png';
 import './styles/PostElement.css';
 import './styles/Dashboard.css';
@@ -7,12 +9,14 @@ import { likePost } from "../data/repository";
 const Like = ({ element }) => {
     const [likes, setLikes] = useState(null);
 
+    // Load likes for passed on post
     useEffect(() => {
         const currentLikes = element.likes;
         setLikes(currentLikes);
 
     }, []);
 
+    // // Add new entry to likes for post
     const handleSubmit = async (event) => {
         event.preventDefault();
 

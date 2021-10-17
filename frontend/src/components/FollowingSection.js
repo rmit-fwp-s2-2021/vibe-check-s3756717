@@ -1,3 +1,5 @@
+/* FOLLOWING SECTION - Follow and unfollow functionality for logged in user. */
+
 import { getFollowing, getUsers } from "../data/repository";
 import { useState, useEffect } from "react";
 import SideBar from './SideBar';
@@ -13,7 +15,7 @@ export default function FollowingSection(props){
     var followingUsernames = [];
     var exclusiveUsernameList = [];
 
-    // Load posts.
+    // Load all users and logged in user's following list.
     useEffect(() => {
         async function loadUsers() {
             const currentUsers = await getUsers();
@@ -33,8 +35,13 @@ export default function FollowingSection(props){
         loadFollowing();
     }, []);
 
+    // Make array with all users' usernames
     users.map((x) => userNames.push(x.username));
+
+    // Make array with usernames of following users list
     following.map((x) => followingUsernames.push(x.followingUsername));
+
+    // Make new array with different elements from both arrays to show users that haven't been followed
     exclusiveUsernameList = userNames.filter(function(obj) { return followingUsernames.indexOf(obj) == -1; });
 
     return(

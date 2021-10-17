@@ -1,3 +1,5 @@
+/* DISLIKE - Dislike a passed on post */
+
 import dislike from './addons/dislike.png';
 import './styles/PostElement.css';
 import './styles/Dashboard.css';
@@ -7,12 +9,14 @@ import { likePost } from "../data/repository";
 const DisLike = ({ element }) => {
     const [dislikes, setDislikes] = useState(null);
 
+    // Load dislikes for passed on post
     useEffect(() => {
         const currentDislikes = element.dislikes;
         setDislikes(currentDislikes);
 
     }, []);
 
+    // Add new entry to dislikes for post
     const disLikeThisPost = async (event) => {
         event.preventDefault();
 
